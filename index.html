@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohammed Afnan — Senior UX Designer</title>
+<meta name="description" content="Senior UX designer, 8+ years in enterprise products. Winner, UX Hack April 2021. Three case files, told as chapters.">
+<meta name="theme-color" content="#faf6f0">
+<script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.gsap)document.documentElement.classList.remove('js')},2000)</script>
+
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+
+<!-- Everything the first paint needs is same-origin: no third-party DNS/TLS
+     round-trips. The three faces used above the fold are preloaded; the italic
+     Fraunces (one word in the standfirst) arrives on demand. -->
+<link rel="preload" href="fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/plexmono-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+
+<!-- ============================================================
+     HOW THIS PAGE IS BUILT
+     One page, three chapters. Each chapter is a <section class="chapter">
+     with an .opener (the full-bleed title card) and a .dossier (the pinned
+     spine on the left, the five beats on the right).
+
+     - Each .beat carries its own .gists block. On desktop, script.js moves
+       those gists into the pinned spine so they punch on as the beat
+       arrives; on mobile they stay inline. Edit the gist where it lives,
+       inside the beat.
+     - .beat-body is what skim mode folds away. Anything that must survive
+       skim mode goes in .gists, not in .beat-body.
+     - Motion is GSAP + ScrollTrigger, self-hosted in /vendor and deferred,
+       so the page renders before any animation library arrives.
+     - Fonts are self-hosted in /fonts (latin subsets, variable). Swap the
+       files there if you ever change faces; the @font-face rules are at
+       the top of style.css.
+     - Any evidence figure opens in a lightbox (click, or Enter/Space on
+       the frame). script.js builds the lightbox; the styles are under
+       "lightbox" in style.css.
+============================================================ -->
+</head>
+<body>
+
+<div id="progress" aria-hidden="true"><b></b></div>
+
+<header class="bar" id="bar">
+  <a class="bar-name" href="#top" aria-label="Mohammed Afnan — back to top"><span class="bar-mark" aria-hidden="true"></span><span>M. Afnan</span></a>
+  <nav class="bar-files" aria-label="Case files">
+    <a href="#file-01" data-file="1"><span class="bar-file-word">File </span>01</a>
+    <a href="#file-02" data-file="2"><span class="bar-file-word">File </span>02</a>
+    <a href="#file-03" data-file="3"><span class="bar-file-word">File </span>03</a>
+  </nav>
+  <div class="bar-right">
+    <span id="readout" aria-live="polite">read 0%</span>
+    <button id="skim" aria-pressed="false" title="Fold the page down to its key lines">skim mode</button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO / MASTHEAD ================= -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <p class="kicker hero-kicker"><span>Senior UX designer &nbsp;·&nbsp; Enterprise and consumer products</span><span class="hero-stamp">Three case files &nbsp;·&nbsp; 2026 edition</span></p>
+    <h1 class="hero-name">
+      <span class="line"><span>Mohammed</span></span>
+      <span class="line"><span>Afnan</span></span>
+    </h1>
+    <div class="hero-row">
+      <p class="standfirst">Eight years designing enterprise tools people are forced to use, until the design makes them <b>want</b> to. Winner, UX&nbsp;Hack&nbsp;2021.</p>
+      <address class="hero-meta">
+        <a href="mailto:mails2afnan@gmail.com">mails2afnan@gmail.com</a>
+        <a href="tel:+917200152092">+91 7200152092</a>
+        <a href="https://www.linkedin.com/in/mohammed-afnan-44a187a3/" target="_blank" rel="noopener">LinkedIn</a>
+        <span>India</span>
+      </address>
+    </div>
+  </div>
+
+  <div class="hero-approach">
+    <div class="approach-text">
+      <p class="gist gist-static">Enterprise products fail quietly: users can't leave, so nobody hears them.</p>
+      <p class="body-t">Consumer apps lose users when the design fails. Enterprise tools keep them, because the users have no choice. The cost hides in slow work, workarounds and training bills. I've spent eight years finding that hidden cost and designing it out.</p>
+      <p class="gist gist-static">My method is boring on purpose: find the real user, find the real cost, fix the decision that caused both.</p>
+    </div>
+    <div class="counters">
+      <div class="counter"><div class="n" data-count="8+">0</div><div class="l">years in UX</div></div>
+      <div class="counter"><div class="n" data-count="1st">0</div><div class="l">UX Hack, April 2021</div></div>
+      <div class="counter"><div class="n" data-count="2nd">0</div><div class="l">runner-up, same hackathon</div></div>
+      <div class="counter"><div class="n" data-count="2">0</div><div class="l">years leading design on DigiAssess</div></div>
+    </div>
+  </div>
+
+  <div class="hero-contents">
+    <p class="kicker">Contents</p>
+    <ol class="toc">
+      <li><a href="#file-01"><span class="toc-no">File 01</span><span class="toc-title">WhatsApp privacy update</span><span class="toc-note">The message, not the product</span><span class="tick">✓</span></a></li>
+      <li><a href="#file-02"><span class="toc-no">File 02</span><span class="toc-title">Meesho seller onboarding audit</span><span class="toc-note">Three breaks in a first order</span><span class="tick">✓</span></a></li>
+      <li><a href="#file-03"><span class="toc-no">File 03</span><span class="toc-title">DigiAssess</span><span class="toc-note">Two years, "Major Contributor" to "Design lead of the Project"</span><span class="tick">✓</span></a></li>
+    </ol>
+    <p class="note">The meter at the top tracks how far you've read, and this index checks itself off. Skim mode folds the page down to its key lines if you have thirty seconds, not ten minutes.</p>
+    <div class="scroll-cue" aria-hidden="true"><span></span>Scroll to open File 01</div>
+  </div>
+</section>
+
+<!-- ================= FILE 01 ================= -->
+<section class="chapter" id="file-01" data-file="1">
+  <div class="opener">
+    <div class="opener-pin">
+      <div class="wipe wipe-paper" aria-hidden="true"></div>
+      <div class="opener-content">
+        <p class="file-no"><span class="file-word">File</span> <span class="file-num">01</span></p>
+        <p class="opener-subject">WhatsApp privacy update</p>
+        <h2 class="opener-title">When WhatsApp lost the trust of 2 billion users, I redesigned the message, not the product.</h2>
+        <dl class="opener-meta">
+          <div><dt>Role</dt><dd>Solo designer</dd></div>
+          <div><dt>Duration</dt><dd>Hackathon sprint</dd></div>
+          <div><dt>Scope</dt><dd>Research, strategy, UI</dd></div>
+          <div><dt>Result</dt><dd>Winner, UX Hack, April 2021</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div class="dossier">
+    <aside class="spine">
+      <div class="spine-head">
+        <span class="spine-file">File 01</span>
+        <span class="spine-subject">WhatsApp privacy update</span>
+      </div>
+      <ol class="beat-nav" aria-label="Beats in this file">
+        <li data-beat="1"><span>01</span>The problem</li>
+        <li data-beat="2"><span>02</span>What I found</li>
+        <li data-beat="3"><span>03</span>The solution</li>
+        <li data-beat="4"><span>04</span>How it compares</li>
+        <li data-beat="5"><span>05</span>What I'd do differently</li>
+      </ol>
+      <div class="gist-stage"></div>
+    </aside>
+
+    <div class="beats">
+
+      <article class="beat" data-beat="1">
+        <div class="gists" data-beat="1" data-label="01 — The problem">
+          <p class="gist">The policy wasn't the failure. The communication was.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">01 — The problem</p>
+          <h3>A policy about business chats read like a threat to everyone.</h3>
+          <p class="body-t">In January 2021, WhatsApp told its users to accept an updated privacy policy or lose access. The update was about business chats. Most users never got that far. They read "WhatsApp shares data with Facebook" and assumed their private messages were next.</p>
+          <p class="body-t">Millions left. Signal and Telegram had their best download weeks ever. WhatsApp had changed almost nothing about personal chats, and still triggered one of the biggest user exoduses in messaging history.</p>
+          <p class="body-t">That's the problem I picked up.</p>
+        </div>
+      </article>
+
+      <article class="beat" data-beat="2">
+        <div class="gists" data-beat="2" data-label="02 — What I found">
+          <p class="gist">Each change was announced the same way to every user, and each time users had less say than before.</p>
+          <p class="gist">This wasn't a privacy problem. It was a segmentation problem wearing a privacy costume.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">02 — What I found</p>
+          <h3>One "Accept" button, four different audiences.</h3>
+          <p class="body-t">I traced WhatsApp's policy history: the 2014 Facebook acquisition and its promise that privacy was coded into WhatsApp's DNA, the 2016 change that shared phone numbers with Facebook and gave users 30 days to opt out, and the 2021 update that offered no choice at all.</p>
+          <p class="body-t">Then I looked at who was actually reading these announcements. WhatsApp had four different audiences behind one button:</p>
+          <ol class="numbered">
+            <li>Personal users, there since the early days, who only chat with friends and family</li>
+            <li>Customers who message businesses occasionally</li>
+            <li>Sellers who run their business on WhatsApp</li>
+            <li>Businesses managing both WhatsApp and Facebook tools</li>
+          </ol>
+          <p class="body-t">The 2021 policy changed things for group four and barely touched group one. But group one is the majority, and the announcement made no distinction. So the people least affected panicked the most, and left.</p>
+          <div class="counters">
+            <div class="counter"><div class="n" data-count="2B">0</div><div class="l">users saw the notice</div></div>
+            <div class="counter"><div class="n" data-count="4">0</div><div class="l">audiences, one message</div></div>
+            <div class="counter"><div class="n" data-count="1">0</div><div class="l">group actually affected</div></div>
+          </div>
+          <figure class="evidence">
+            <div class="frame"><img src="assets/cs1-01.webp" width="1314" height="654" loading="lazy" decoding="async" alt="Annotated screenshot of WhatsApp's 2021 privacy policy update notice, with callouts pointing to the lines that were unclear or missing for everyday users."></div>
+            <figcaption>The original notice, annotated: where it fell short for everyday users.</figcaption>
+          </figure>
+          <p class="body-t">The original notice was a wall of legal text with two real options: accept, or eventually lose your account. It answered none of the questions users actually had. Can WhatsApp read my messages? Does Facebook see my chats? What changes for me?</p>
+        </div>
+      </article>
+
+      <article class="beat" data-beat="3">
+        <div class="gists" data-beat="3" data-label="03 — The solution">
+          <p class="gist">Reassurance before legal text, in plain words.</p>
+          <p class="gist">Defaults protect the user. Nobody accepts terms they don't need.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">03 — The solution</p>
+          <h3>Three moves, all aimed at matching the message to the reader.</h3>
+          <ol class="moves">
+            <li>
+              <h4>Say what isn't changing, first.</h4>
+              <p class="body-t">The first screen answers the scariest question before anything else: personal conversations stay end-to-end encrypted, and WhatsApp can't read them.</p>
+            </li>
+            <li>
+              <h4>Separate business chats from personal chats.</h4>
+              <p class="body-t">The policy only affected conversations with businesses. So the communication treats them as what they are: a separate, optional feature with its own explanation, its own visual label, and its own decision.</p>
+            </li>
+            <li>
+              <h4>Make business messaging opt-in, with privacy on by default.</h4>
+              <p class="body-t">Users choose whether businesses can reach them. Anyone who wants business features turns them on, understands the trade, and moves on.</p>
+            </li>
+          </ol>
+          <div class="screens">
+            <figure class="evidence" data-depth="1"><div class="frame"><img src="assets/cs1-02.webp" width="1314" height="702" loading="lazy" decoding="async" alt="Screen 1 — privacy reassurance for personal chats"></div><figcaption>Screen 1 — reassurance for personal chats</figcaption></figure>
+            <figure class="evidence" data-depth="2"><div class="frame"><img src="assets/cs1-03.webp" width="1314" height="702" loading="lazy" decoding="async" alt="Screen 2 — business tag distinguishing business chats"></div><figcaption>Screen 2 — business chats labelled</figcaption></figure>
+            <figure class="evidence" data-depth="3"><div class="frame"><img src="assets/cs1-04.webp" width="1314" height="702" loading="lazy" decoding="async" alt="Screen 3 — opt-in toggle with privacy policy explanation"></div><figcaption>Screen 3 — opt-in toggle, privacy on by default</figcaption></figure>
+          </div>
+        </div>
+      </article>
+
+      <article class="beat" data-beat="4">
+        <div class="gists" data-beat="4" data-label="04 — How it compares">
+          <p class="gist">Independent convergence, not influence.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">04 — How it compares</p>
+          <h3>The same calls WhatsApp's team made, and one they stopped short of.</h3>
+          <p class="body-t">WhatsApp's own fix rolled out between February and May 2021: an in-app banner, a staged explanation flow, and a line making clear personal chats couldn't be read or listened to. A hackathon jury picked my solution as the winner while that rollout was still in progress. I didn't have WhatsApp's constraints, their legal team, or their scale. But on the calls I could make, I made the same ones their team made, and pushed past them where they stopped.</p>
+
+          <div class="compare-slider" id="compareSlider">
+            <div class="compare-slider-frame">
+              <img src="assets/cs1-05.webp" width="2146" height="1362" loading="lazy" decoding="async" alt="WhatsApp shipped — in-app banner, staged explanation flow, encryption reassurance" class="compare-slider-img">
+              <div class="compare-slider-overlay">
+                <img src="assets/cs1-06.webp" width="2146" height="1362" loading="lazy" decoding="async" alt="My solution — reassurance screen, business chats labelled, opt-in toggle" class="compare-slider-img">
+              </div>
+              <div class="compare-slider-handle"><div class="compare-slider-line"></div><div class="compare-slider-knob">↔</div></div>
+              <span class="compare-slider-tag compare-slider-tag-left">My solution</span>
+              <span class="compare-slider-tag compare-slider-tag-right">WhatsApp shipped</span>
+            </div>
+            <input type="range" min="0" max="100" value="50" class="compare-slider-input" id="compareSliderInput" aria-label="Drag to compare WhatsApp's shipped flow with my solution">
+            <p class="caption">Drag to compare. WhatsApp's shipped flow (Feb–May 2021) against my solution (April 2021), at the same point in the flow.</p>
+          </div>
+
+          <div class="compare" role="table" aria-label="WhatsApp's shipped flow compared with my solution">
+            <div class="compare-row compare-head" role="row"><div role="columnheader">WhatsApp shipped</div><div role="columnheader">My solution</div></div>
+            <div class="compare-row" role="row"><div role="cell">Plain-language reassurance about encryption, placed first</div><div role="cell">Same call, independently</div></div>
+            <div class="compare-row" role="row"><div role="cell">Staged, skimmable screens instead of a legal wall</div><div role="cell">Same call, independently</div></div>
+            <div class="compare-row" role="row"><div role="cell">Business chats labelled as optional</div><div role="cell">Business chats labelled, and opt-in with a real control</div></div>
+            <div class="compare-row" role="row"><div role="cell">One message explained to everyone</div><div role="cell">Four user types segmented, message matched to reader</div></div>
+            <div class="compare-row" role="row"><div role="cell">Flow ends at "Accept"</div><div role="cell">Flow ends at a settings choice the user owns</div></div>
+          </div>
+          <p class="note">Rollout announced Feb 18, 2021, effective May 15, 2021, before the hackathon. This is convergence on the same problem, not influence in either direction.</p>
+        </div>
+      </article>
+
+      <article class="beat" data-beat="5">
+        <div class="gists" data-beat="5" data-label="05 — What I'd do differently">
+          <p class="gist">I never validated which words actually lower panic.</p>
+          <p class="gist">Mapping four segments took most of my sprint. I'd compress that to hours now.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">05 — What I'd do differently</p>
+          <h3>Untested copy, and research I'd now compress.</h3>
+          <p class="body-t">I'd test the copy. My screens assumed plain language works better than legal language, which is a safe bet, but I'd want to run the variants through quick comprehension tests before committing.</p>
+          <p class="body-t">And I'd use AI in the research phase. Mapping four user segments from policy history ate most of the sprint; today that's a few hours, and the time saved goes into testing instead.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= FILE 02 ================= -->
+<section class="chapter" id="file-02" data-file="2">
+  <div class="opener">
+    <div class="opener-pin">
+      <div class="wipe wipe-paper" aria-hidden="true"></div>
+      <div class="opener-content">
+        <p class="file-no"><span class="file-word">File</span> <span class="file-num">02</span></p>
+        <p class="opener-subject">Meesho seller onboarding audit</p>
+        <h2 class="opener-title">A reseller's first order decides whether she trusts Meesho enough to stay. I audited that flow against her own goals, and found three places it quietly breaks them.</h2>
+        <dl class="opener-meta">
+          <div><dt>Role</dt><dd>Solo auditor</dd></div>
+          <div><dt>Duration</dt><dd>Hackathon weekend, separate round from File 01</dd></div>
+          <div><dt>Scope</dt><dd>Heuristic audit, flow redesign proposal</dd></div>
+          <div><dt>Result</dt><dd>Runner-up, UX Hack, April 2021</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div class="dossier">
+    <aside class="spine">
+      <div class="spine-head">
+        <span class="spine-file">File 02</span>
+        <span class="spine-subject">Meesho seller onboarding audit</span>
+      </div>
+      <ol class="beat-nav" aria-label="Beats in this file">
+        <li data-beat="1"><span>01</span>The problem</li>
+        <li data-beat="2"><span>02</span>What I found</li>
+        <li data-beat="3"><span>03</span>The proposal</li>
+        <li data-beat="4"><span>04</span>How it compares</li>
+        <li data-beat="5"><span>05</span>What I'd do differently</li>
+      </ol>
+      <div class="gist-stage"></div>
+    </aside>
+
+    <div class="beats">
+
+      <article class="beat" data-beat="1">
+        <div class="gists" data-beat="1" data-label="01 — The problem">
+          <p class="gist">A person's first experience with a product decides whether they trust it enough to stay, refer it, or try again.</p>
+          <p class="gist">Three goals kept coming up: share products easily, keep track of orders across customers, save time for everything else in her day.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">01 — The problem</p>
+          <h3>A new seller's first order quietly decides if she stays.</h3>
+          <p class="body-t">Meesho is a reselling platform for clothing and accessories. Anyone can sign up, pick a product, share it on WhatsApp or social media, and earn a margin if a customer buys through them.</p>
+          <p class="body-t">The brief was open: pick any one flow on the platform and justify the pick. I chose onboarding through a seller's first order, for the reason the brief itself points to. Get that first order wrong, and she won't stay, refer, or try again.</p>
+          <figure class="evidence">
+            <div class="frame"><img src="assets/first-experience.webp" width="1228" height="684" loading="lazy" decoding="async" alt="Excerpt from the audit reasoning: a positive first experience makes a user more likely to retain the product, refer it to others, and try another product from the same brand."></div>
+            <figcaption>The reasoning I used to justify the pick, taken straight from the audit.</figcaption>
+          </figure>
+          <h4>Who I audited for</h4>
+          <p class="body-t">Most Meesho resellers are housewives and young women, running their first business of any kind on the side of a job or their studies. Tech comfort ranges wide: some only know WhatsApp and Facebook, others already handle online payments without help.</p>
+          <figure class="evidence">
+            <div class="frame"><img src="assets/persona.webp" width="1546" height="1120" loading="lazy" decoding="async" alt="Persona used for the audit: a reseller who is a housewife, part-time worker, or college student, low to high tech savvy, aged over 20, selling through WhatsApp, Instagram, and Facebook."></div>
+            <figcaption>The persona behind the audit: goals, frustrations, and motivations, defined going in.</figcaption>
+          </figure>
+          <p class="body-t">Her biggest frustration was named before I opened the app: <b>keeping track of customers and orders across different channels.</b> I audited every screen against usability heuristics, looking for exactly where the flow helps or hurts her three goals, for two user types. Type A has never resold anything and only knows the app pays out. Type B has a rough idea of the process and expects the app to match it.</p>
+        </div>
+      </article>
+
+      <article class="beat" data-beat="2">
+        <div class="gists" data-beat="2" data-label="02 — What I found">
+          <p class="gist">Five screens got it right. Three broke the process for a first-timer.</p>
+          <p class="gist">The app hands the user to WhatsApp mid-flow and doesn't always let her come back.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">02 — What I found</p>
+          <h3>Five clean screens, and three that work against her.</h3>
+          <p class="body-t">The gender picker uses icons over text and gives a clear exit. The step-complete screens show exactly where you are. Payment offers cash on delivery alongside online options. Address fields validate as you type. The order summary is editable and shows status clearly. Five screens passed clean.</p>
+          <div class="counters">
+            <div class="counter"><div class="n" data-count="3">0</div><div class="l">critical issues</div></div>
+            <div class="counter"><div class="n" data-count="2">0</div><div class="l">minor issues</div></div>
+            <div class="counter"><div class="n" data-count="5">0</div><div class="l">screens, good practice</div></div>
+          </div>
+          <figure class="evidence tall">
+            <div class="frame"><img src="assets/flow-problems.webp" width="1218" height="1504" loading="lazy" decoding="async" alt="Flowchart of the Meesho seller onboarding flow with issues marked at the points where sharing, sign-up, and checkout break for a first-time user."></div>
+            <figcaption>The audited flow, issues marked at the points they occur.</figcaption>
+          </figure>
+
+          <h4>No way back from WhatsApp</h4>
+          <p class="body-t">Tap share, and the app auto-navigates to WhatsApp twice: once for the photo, once for the description, with no cancel. Hit back by mistake and it sends you to WhatsApp again to finish the share it thinks you abandoned. Her first goal, share products easily, working against her instead of for her.</p>
+          <figure class="evidence">
+            <div class="frame"><img src="assets/share-strip.webp" width="1600" height="1234" loading="lazy" decoding="async" alt="Sequence of screens showing a product being shared, then the app auto-navigating to WhatsApp with no way to cancel."></div>
+            <figcaption>The share sequence: two forced hand-offs to WhatsApp, no cancel option.</figcaption>
+          </figure>
+
+          <h4>A sign-up prompt that ambushes the user</h4>
+          <p class="body-t">A phone-number dialog appears out of nowhere mid-flow. Dismiss it by accident and there's no route forward: stuck on the product-details screen with no idea what to do next. Saving time was one of her three goals. A dead end mid-flow is the opposite of that.</p>
+          <figure class="evidence">
+            <div class="frame"><img src="assets/signup-ambush.webp" width="1600" height="789" loading="lazy" decoding="async" alt="Sign-up dialog box appearing unexpectedly mid-flow, with no path forward if dismissed."></div>
+            <figcaption>The sign-up dialog: no warning it's coming, no recovery if it's dismissed.</figcaption>
+          </figure>
+
+          <h4>Checkout before the sale</h4>
+          <p class="body-t">The app takes the reseller to checkout right after she shares a product, with no signal that checkout should wait for a customer to reply. A first-timer treats this as the normal order, not a placeholder, and gets confused the next time she logs in. This is her named frustration exactly: checkout with no link to which customer or which channel makes tracking harder from the very first order.</p>
+        </div>
+      </article>
+
+      <article class="beat" data-beat="3">
+        <div class="gists" data-beat="3" data-label="03 — The proposal">
+          <p class="gist">Sellers already carry a three-step mental model in from the offline world. I built the app to match it, instead of the other way round.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">03 — The proposal</p>
+          <h3>Map the real-world process first, then rebuild the app flow around it.</h3>
+          <p class="body-t">The real-world version runs six steps: check availability, share, wait for a customer's interest, collect details, get paid, place the order. I mapped that down to the three steps that matter for a first-time user: select and share the product, wait for interest, place the order with margin. Once delivered, the profit lands in the reseller's account.</p>
+          <figure class="evidence">
+            <div class="frame"><img src="assets/real-world-flow.webp" width="1600" height="995" loading="lazy" decoding="async" alt="Diagram mapping the real-world seller's six-step process onto a simplified three-step app flow: select product, share on social media, place the order with margin."></div>
+            <figcaption>The real-world process, mapped onto the app's three-step backbone.</figcaption>
+          </figure>
+          <p class="body-t">That three-step shape becomes the backbone of the redesign:</p>
+          <ul class="plain">
+            <li>Sign-up moves to before the process starts, phone number only, so it never interrupts mid-flow again.</li>
+            <li>The onboarding video becomes optional, since Type B already knows the basics. A stepper shows first-timers where they are across the three steps.</li>
+            <li>Sharing gets equal treatment across WhatsApp, Instagram, and Facebook: one dropdown, no forced auto-navigation, an explicit and cancellable share action.</li>
+            <li>Shared products are filtered into their own list, so when a customer responds the reseller can find it and place the order without hunting.</li>
+            <li>Customers and orders can be tagged by the channel they came in on, so a growing customer list stays filterable.</li>
+          </ul>
+          <figure class="evidence tall">
+            <div class="frame"><img src="assets/proposed-flow.webp" width="1488" height="1486" loading="lazy" decoding="async" alt="Proposed simplified onboarding and first-order flow, organized into three labelled steps: select product, share product, place the order."></div>
+            <figcaption>The proposed flow: three labelled steps, sign-up moved to the start, no forced hand-offs.</figcaption>
+          </figure>
+          <div class="counters">
+            <div class="counter"><div class="n" data-count="6">0</div><div class="l">real-world steps</div></div>
+            <div class="counter"><div class="n" data-count="3">0</div><div class="l">app steps, proposed</div></div>
+            <div class="counter"><div class="n" data-count="0">0</div><div class="l">forced hand-offs left</div></div>
+          </div>
+          <p class="note">Each of the three critical issues is addressed directly. None of this is measured. It's a hackathon proposal, not a shipped result.</p>
+        </div>
+      </article>
+
+      <article class="beat" data-beat="4">
+        <div class="gists" data-beat="4" data-label="04 — How it compares">
+          <p class="gist">Same three steps, none of the ambushes.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">04 — How it compares</p>
+          <h3>The current flow, set against what I proposed to fix it.</h3>
+          <p class="body-t">This was my hackathon entry and personal proposal, judged against other entries over one weekend. I have no evidence Meesho adopted any of it.</p>
+          <div class="compare" role="table" aria-label="Current Meesho flow compared with the proposed flow">
+            <div class="compare-row compare-head" role="row"><div role="columnheader">Current flow</div><div role="columnheader">Proposed flow</div></div>
+            <div class="compare-row" role="row"><div role="cell">Sign-up appears mid-flow, unrecoverable if dismissed</div><div role="cell">Sign-up done upfront, before the process starts</div></div>
+            <div class="compare-row" role="row"><div role="cell">Onboarding video compulsory for all users</div><div role="cell">Video optional, a stepper shown instead</div></div>
+            <div class="compare-row" role="row"><div role="cell">Share forces auto-navigation to WhatsApp, no cancel</div><div role="cell">Explicit share action, cancel available</div></div>
+            <div class="compare-row" role="row"><div role="cell">One channel assumed per share, extra CTAs</div><div role="cell">One dropdown; WhatsApp, Instagram and Facebook treated equally</div></div>
+            <div class="compare-row" role="row"><div role="cell">Checkout appears right after share, no context</div><div role="cell">Checkout tied to customer interest, shared products filtered separately</div></div>
+            <div class="compare-row" role="row"><div role="cell">No record of which channel a customer came from</div><div role="cell">Orders and customers tagged by channel, for later filtering</div></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="beat" data-beat="5">
+        <div class="gists" data-beat="5" data-label="05 — What I'd do differently">
+          <p class="gist">I never tested the proposed flow with an actual reseller.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">05 — What I'd do differently</p>
+          <h3>Untested assumptions about drop-off.</h3>
+          <p class="body-t">I'd run it past two or three real Type A and Type B users before finalising the structure. I assumed moving sign-up to the very start doesn't hurt drop-off. I'd want to check that, not assume it.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= FILE 03 ================= -->
+<section class="chapter" id="file-03" data-file="3">
+  <div class="opener">
+    <div class="opener-pin">
+      <div class="wipe wipe-paper" aria-hidden="true"></div>
+      <div class="opener-content">
+        <p class="file-no"><span class="file-word">File</span> <span class="file-num">03</span></p>
+        <p class="opener-subject">DigiAssess, assessment platform</p>
+        <h2 class="opener-title">A manual, multi-role process for assessing student learning became one connected system, and I went from contributor to design lead on it.</h2>
+        <dl class="opener-meta">
+          <div><dt>Role</dt><dd>Design lead, from contributor</dd></div>
+          <div><dt>Duration</dt><dd>2 years</dd></div>
+          <div><dt>Scope</dt><dd>Research, IA, wireframes, visual design, user testing</dd></div>
+          <div><dt>Note</dt><dd>NDA product; screens recreated for this file</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div class="dossier">
+    <aside class="spine">
+      <div class="spine-head">
+        <span class="spine-file">File 03</span>
+        <span class="spine-subject">DigiAssess</span>
+      </div>
+      <ol class="beat-nav" aria-label="Beats in this file">
+        <li data-beat="1"><span>01</span>The problem</li>
+        <li data-beat="2"><span>02</span>What I found</li>
+        <li data-beat="3"><span>03</span>The solution</li>
+        <li data-beat="4"><span>04</span>Outcome</li>
+        <li data-beat="5"><span>05</span>What I'd do differently</li>
+      </ol>
+      <div class="gist-stage"></div>
+    </aside>
+
+    <div class="beats">
+
+      <article class="beat" data-beat="1">
+        <div class="gists" data-beat="1" data-label="01 — The problem">
+          <p class="gist">The real complexity wasn't the UI. It was who depended on whom.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">01 — The problem</p>
+          <h3>Assessment prep was a manual process, split across roles that never saw the whole picture.</h3>
+          <p class="body-t">DigiAssess is a web app that lets institutions assess student learning outcomes and map them to program and course learning outcomes. Before the redesign, the process behind scheduling, conducting, and publishing assessments lived in people's heads, split across subject-matter experts, item authors, proctors, and reviewers. No shared model connected them.</p>
+          <p class="body-t">I joined as a contributor, working on individual modules. Over two years that grew into leading design for the product, working with other designers on a system that had to hold together across every one of those roles at once.</p>
+        </div>
+      </article>
+
+      <article class="beat" data-beat="2">
+        <div class="gists" data-beat="2" data-label="02 — What I found">
+          <p class="gist">The flowcharts weren't documentation. They were the requirement.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">02 — What I found</p>
+          <h3>Every role's task depended on another role finishing theirs first.</h3>
+          <p class="body-t">Working with subject-matter experts over remote calls, I mapped the raw process into flowcharts: how assessments get scheduled, how course outcomes map to program outcomes, how a student and proctor authenticate before an exam starts. Each flow surfaced a hidden handoff. A proctor couldn't act until a student authenticated. An author couldn't publish until a reviewer signed off.</p>
+          <figure class="evidence wide">
+            <div class="frame"><img src="assets/cs3-01.webp" width="2386" height="1010" loading="lazy" decoding="async" alt="Composite of original process-mapping artifacts: swimlane flowcharts for secure assessment flow, student and proctor authentication, CLO-to-PLO mapping trees, and a kanban-style assessment status board."></div>
+            <figcaption>Process maps from the actual working files: secure assessment flow, student/proctor authentication swimlanes, CLO-to-PLO mapping trees. Screens elsewhere in this file are recreated for NDA reasons; these show the underlying thinking.</figcaption>
+          </figure>
+          <h4>One handoff, three roles waiting on it</h4>
+          <p class="body-t">A single exam session touched a scheduler, an exam co-ordinator, and one or more proctors, each seeing a different slice of the same event. If a proctor's login was late, or a student was paused mid-exam, that status had to surface to the co-ordinator immediately, not after the fact. The dashboard had to show live state across roles, not just the current user's own queue.</p>
+        </div>
+      </article>
+
+      <article class="beat" data-beat="3">
+        <div class="gists" data-beat="3" data-label="03 — The solution">
+          <p class="gist">Status, not navigation, was the interface.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">03 — The solution</p>
+          <h3>Design around the handoffs, not just the screens.</h3>
+          <p class="body-t">The assessment dashboard groups every assessment by where it sits for the person looking at it: not started, ongoing, with the item author, or fulfilled. A course only moves forward once the role holding it acts, so the board doubles as a live map of who's blocking what.</p>
+          <figure class="evidence">
+            <div class="frame"><img src="assets/cs3-02.webp" width="1044" height="758" loading="lazy" decoding="async" alt="DigiAssess assessment dashboard showing four columns: Not Started, Ongoing, With Item Author, and Fulfilled, each with course cards showing assessment status and item progress."></div>
+            <figcaption>Assessment dashboard: grouped by which role is holding each assessment, not by course or date.</figcaption>
+          </figure>
+          <p class="body-t">Course outcomes had to map to program outcomes underneath all of this, and that mapping is what the whole assessment gets measured against later. I simplified the mapping view to one course at a time, so a subject-matter expert could validate it without holding the entire curriculum in their head.</p>
+          <figure class="evidence wide">
+            <div class="frame"><img src="assets/cs3-03.webp" width="1914" height="994" loading="lazy" decoding="async" alt="Collage of recreated DigiAssess screens: outcome-mapping heatmap, live session dashboard, CLO-to-PLO alignment table, scheduler calendar, student performance against target benchmark, and a test specification graph of item types."></div>
+            <figcaption>Outcome mapping and analytics views, recreated: a session's live state, one course's outcome alignment, a student's performance against the target line, and the item mix per course that told authors how much work was left.</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="beat" data-beat="4">
+        <div class="gists" data-beat="4" data-label="04 — Outcome">
+          <p class="gist">Requirements and screens were validated directly with subject-matter experts and users, not assumed.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">04 — Outcome</p>
+          <h3>From individual modules to owning the whole system.</h3>
+          <div class="counters">
+            <div class="counter"><div class="n" data-count="2">0</div><div class="l">years on the product</div></div>
+            <div class="counter"><div class="n" data-count="Lead">0</div><div class="l">from contributor</div></div>
+            <div class="counter"><div class="n" data-count="Live">0</div><div class="l">requirements validated with SMEs and users</div></div>
+          </div>
+          <p class="body-t">Over two years I moved from contributing individual modules to leading design for the product, working with other designers on it. I got recognition from stakeholders and leadership for my contributions, and left documentation behind for other teams to build from when I moved on before deployment.</p>
+        </div>
+      </article>
+
+      <article class="beat" data-beat="5">
+        <div class="gists" data-beat="5" data-label="05 — What I'd do differently">
+          <p class="gist">Research and validation happened with real users, but a handpicked set.</p>
+        </div>
+        <div class="beat-body">
+          <p class="label">05 — What I'd do differently</p>
+          <h3>I tested with the users I had access to, not the full range.</h3>
+          <p class="body-t">If I could go back, I'd push harder for access to the full range of users, especially proctors and students who'd use the system live under exam conditions, not just the people made available to me. Handpicked users can confirm a flow works. They can't tell you what breaks under the pressure of a real exam room.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLOSING ================= -->
+<section class="closing" id="closing">
+  <div class="closing-inner">
+    <p class="kicker closing-kicker">End of file &nbsp;·&nbsp; <span id="closing-readout">read 100%</span></p>
+    <p class="closing-big">
+      <span class="line"><span>You read the whole file.</span></span>
+      <span class="line"><span>Most visitors don't.</span></span>
+    </p>
+    <p class="closing-sub">That kind of attention is exactly what I bring to enterprise products. Let's talk.</p>
+    <div class="contact-row">
+      <a class="primary" href="mailto:mails2afnan@gmail.com">Email me</a>
+      <a href="https://www.linkedin.com/in/mohammed-afnan-44a187a3/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://wa.me/917200152092" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+
+    <div class="about">
+      <div>
+        <p class="label">The short version</p>
+        <p class="body-t">Senior UX designer, enterprise B2B tools. I ask more than I talk. I came to UX from architecture school, where I placed first in a semester by thinking about the people in the building instead of the drawing on the sheet. The sheet was incomplete. The thinking wasn't. That trade has defined my work since.</p>
+        <p class="body-t">I work with AI daily and design faster because of it, not instead of it. Research synthesis, copy variants, prototype logic: the machine drafts, I decide. Judgment is the part that doesn't automate, and it's the part I sell.</p>
+      </div>
+      <div>
+        <p class="label">File 04 — Declassifying</p>
+        <p class="body-t">Another good project, enterprise B2B, being rebuilt NDA-safe. Research and ideation sit under NDA, so I can't show them here yet. I can walk you through the process and my contribution in an interview.</p>
+        <p class="note">Based in India. Passport ready, family on board, notice period zero.</p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <span>© 2026 Mohammed Afnan</span>
+    <span>Set in Fraunces &amp; Newsreader · No template used</span>
+  </footer>
+</section>
+
+</main>
+
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>
